@@ -5,90 +5,59 @@
         
         
         <style>
-        #myInput {
-  background-image: url('/css/searchicon.png');
-  background-position: 10px 12px;
-  background-repeat: no-repeat;
-  width: 100%;
-  font-size: 16px;
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd; 
-  margin-bottom: 12px;
-}
+table {
+                border-collapse: collapse;
+                border: 2px black solid;
+                font: 12px sans-serif;
+            }
 
-#myTable {
-  border-collapse: collapse;
-  width: 100%;
-  border: 1px solid #ddd;
-  font-size: 18px; 
-}
-
-#myTable th, #myTable td {
-  text-align: left; 
-  padding: 12px;
-}
-
-#myTable tr {
-
-  border-bottom: 1px solid #ddd;
-}
-
-#myTable tr.header, #myTable tr:hover {
-  background-color: #f1f1f1;
-}
+            td {
+                border: 1px blue solid;
+                padding: 5px;
+            }
         </style>
         
-        <script>
-function myFunction() {
-
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
-
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
-}
-</script>
+        
     </head>
     
     
     
 <body>
-   <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for County..">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.js"></script>
+<script>
+    function arrayToTable(tableData) {
+        var table = $('<table></table>');
+        $(tableData).each(function (i, rowData) {
+            var row = $('<tr></tr>');
+            $(rowData).each(function (j, cellData) {
+                row.append($('<td>'+cellData+'</td>'));
+            });
+            table.append(row);
+        });
+        return table;
+    }
 
-<table id="myTable">
-  <tr class="header">
-    <th style="width:60%;">No. Pharmacies</th>
-    <th style="width:40%;">County</th>
-  </tr>
-  <tr>
-    <td>100</td>
-    <td>Clare</td>
-  </tr>
-  <tr>
-    <td>200</td>
-    <td>Cork</td>
-  </tr>
-  <tr>
-    <td>87</td>
-    <td>Meath</td>
-  </tr>
-  <tr>
-    <td>126</td>
-    <td>Galway</td>
-  </tr>
-</table> 
+    $.ajax({
+        type: "GET",
+        url: "http://localhost/PMC/Pharmacies.csv",
+        success: function (data) {
+            $('body').append(arrayToTable(Papa.parse(data).data));
+        }
+        
+        
+    });
+    
+    $.ajax({
+        type: "GET",
+        url: "http://localhost/PMC/Pharmacists.csv",
+        success: function (data) {
+            $('body').append(arrayToTable(Papa.parse(data).data));
+        }
+        
+        
+    });
+</script>
     
     </body>
 </html>
