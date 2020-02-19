@@ -2,18 +2,36 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         
         <style>
-table {
+            
+            body{
+                font-family: calibri, sans-serif;
+                width: 80%;
+               margin: auto;
+            }
+            
+            
+#table1 {
                 border-collapse: collapse;
                 border: 2px black solid;
                 font: 12px sans-serif;
+                margin: auto;
             }
 
             td {
                 border: 1px blue solid;
-                padding: 5px;
+                padding: .5em;
+                font-size: 1.2em;
+                text-align: center;
+            }
+            
+            #myInput{
+                margin: 20px;
             }
         </style>
         
@@ -23,31 +41,39 @@ table {
     
     
 <body>
+    <div class="grid-container">
+    <h1>Database of Pharmacies in Ireland</h1>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.js"></script>
+    <label for="myInput">Enter County:</label>
+    <input id="myInput" type="text" onkeyup="myFunction()">
+    
 <script>
+
+    
     function arrayToTable(tableData) {
-        var table = $('<table></table>');
+        var table = $('<table id="table1" + class="table-striped" ></table>');
         $(tableData).each(function (i, rowData) {
             var row = $('<tr></tr>');
             $(rowData).each(function (j, cellData) {
-                row.append($('<td>'+cellData+'</td>'));
+                row.append($('<td class="tableData">'+cellData+'</td>'));
             });
             table.append(row);
         });
         return table;
     }
-
+    
+    //Getting Pharmacies CSV
     $.ajax({
         type: "GET",
         url: "http://localhost/PMC/Pharmacies.csv",
         success: function (data) {
             $('body').append(arrayToTable(Papa.parse(data).data));
         }
-        
-        
-    });
+        });
+     
     
+    //Getting Pharmacists CSV
     $.ajax({
         type: "GET",
         url: "http://localhost/PMC/Pharmacists.csv",
@@ -55,9 +81,47 @@ table {
             $('body').append(arrayToTable(Papa.parse(data).data));
         }
         
+    
+   
+    
+    });
+    //Getting Pharmacists_Area CSV
+    $.ajax({
+        type: "GET",
+        url: "http://localhost/PMC/Pharmacists_Area.csv",
+        success: function (data) {
+            $('body').append(arrayToTable(Papa.parse(data).data));
+        }
+          });
+    //Getting Pharmacists_Gender CSV
+    $.ajax({
+        type: "GET",
+        url: "http://localhost/PMC/Pharmacists_Gender.csv",
+        success: function (data) {
+            $('body').append(arrayToTable(Papa.parse(data).data));
+        }
         
     });
-</script>
+    function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("table1");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
     
+</script>
+    </div>
     </body>
 </html>
