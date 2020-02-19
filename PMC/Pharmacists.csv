@@ -1,0 +1,69 @@
+Year of Pharmacist Date registered,Route,,
+2018,EU,149,
+2018,National,143,
+2018,Third Country,6,
+2019,EU,205,
+2019,National,165,
+2019,Third Country,7,
+2020,EU,17,
+2020,National,2,
+Grand Total,Total,694,
+,,,
+,,,
+Category,,,
+Pharmaceutical Assistant,302,,
+Pharmacist,"6,494",,
+Grand Total,"6,796",,
+,,,
+,,,
+Year,Ph.Assistants,Pharmacies,Pharmacists
+2007,535,1628,4504
+2008,535,1680,4446
+2009,537,1704,4451
+2010,515,1728,4567
+2011,510,1757,4793
+2012,499,1784,5004
+2013,483,1818,5245
+2014,452,1848,5439
+2015,423,1880,5641
+2016,375,1899,5843
+2017,363,1933,6097
+2018,330,1953,6246
+,,,
+,,,
+Pharmacist type,Age (group),,
+Assistant,Other,7,
+Assistant,56 to 65,189,
+Assistant,66 to 75,98,
+Assistant,Over 75,8,
+Assistant,Total,302,
+Pharmacist,25 and under,398,
+Pharmacist,Other,9,
+Pharmacist,26 to 35,"2,372",
+Pharmacist,36 to 45,"2,120",
+Pharmacist,46 to 55,"1,013",
+Pharmacist,56 to 65,439,
+Pharmacist,66 to 75,105,
+Pharmacist,Over 75,38,
+Pharmacist,Total,"6,494",
+,,,
+,,,
+Area Of Practice,,,
+Not Stated,"1,534",,
+Academic,85,,
+Community,"3,741",,
+Hospital,660,,
+Industry,211,,
+Not Practising,36,,
+Other,139,,
+Regulatory,88,,
+Grand Total,"6,494",,
+,,,
+,,,
+Pharmacist type,Gender,,
+Assistant,Female,291,
+Assistant,Male,11,
+Assistant,Total,302,
+Pharmacist,Female,"4,200",
+Pharmacist,Male,"2,294",
+Pharmacist,Total,"6,494",
